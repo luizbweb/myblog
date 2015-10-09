@@ -17,11 +17,10 @@ def post_new(request):
 			post.author = request.user
 			post.save()
 			return redirect('blog.views.post_detail', pk=post.pk)
-
 	else:
 		form = PostForm()
-
 	return render(request, 'blog/post_edit.html', {'form': form})
+
 def post_edit(request, pk):
 	post = get_object_or_404(Post, pk=pk)
 	if request.method == "POST":
@@ -31,6 +30,6 @@ def post_edit(request, pk):
 			post.author = request.user
 			post.save()
 			return redirect('blog.views.post_detail', pk=post.pk)
-		else:
-			form = PostForm(instance=post)
-		return render(request, 'blog/post_edit.html', {'form': form})
+	else:
+		form = PostForm(instance=post)
+	return render(request, 'blog/post_edit.html', {'form': form})
